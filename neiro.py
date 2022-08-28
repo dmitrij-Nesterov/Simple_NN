@@ -19,12 +19,8 @@ def get_accuracy():
 	for x, y in dataset:
 		t1 = x @ synaptic_weights_input + b_input
 		h1 = relu(t1)
-		t2 = h1 @ synaptic_weights_hidden1 + b_hidden1
-		h2 = relu(t2)
-		t3 = h2 @ synaptic_weights_hidden2 + b_hidden2
-		h3 = relu(t3)
-		t4 = h3 @ synaptic_weights_hidden3 + b_hidden3
-		z = softmax(t4)
+		t2 = h1 @ synaptic_weights_hidden + b_hidden
+		z = softmax(t2)
 		pred_y = np.argmax(z)
 		if pred_y == y:
 			correct += 1
@@ -40,7 +36,7 @@ CELL_LEN = 25
 NUM_INPUTS = 625
 NUM_HIDDEN = 125
 NUM_OUTPUTS = 2
-NUM_EPOCH = 10000
+NUM_EPOCH = 400
 clock = pygame.time.Clock()
 dataset = [(np.zeros((1, NUM_INPUTS)), )]
 n = 0
@@ -150,12 +146,8 @@ while run:
 				x = dataset[n][0][0]
 				t1 = x @ synaptic_weights_input + b_input
 				h1 = relu(t1)
-				t2 = h1 @ synaptic_weights_hidden1 + b_hidden1
-				h2 = relu(t2)
-				t3 = h2 @ synaptic_weights_hidden2 + b_hidden2
-				h3 = relu(t3)
-				t4 = h3 @ synaptic_weights_hidden3 + b_hidden3
-				z = softmax(t4)
+				t2 = h1 @ synaptic_weights_hidden + b_hidden
+				z = softmax(t2)
 				text = font.render(classes[np.argmax(z)], True, WHITE)
 
 	screen.blit(text, cord_text)
